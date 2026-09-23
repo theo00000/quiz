@@ -90,7 +90,11 @@ export default function Quiz() {
     } catch (err) {
       console.error(err);
 
-      setError("Gagal mengambil soal. Silakan coba lagi.");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Gagal mengambil soal.");
+      }
     } finally {
       setLoading(false);
     }
@@ -149,7 +153,7 @@ export default function Quiz() {
 
     const question = questions[currentQuestion];
 
-    if (!question) return;
+    if (!question) return null;
 
     const isCorrect = answer === question.correctAnswer;
 
@@ -203,9 +207,7 @@ export default function Quiz() {
   if (loading) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-gray-100">
-        <p className="text-lg font-medium text-gray-600">
-          Loading questions...
-        </p>
+        <p>Loading questions...</p>
       </main>
     );
   }
