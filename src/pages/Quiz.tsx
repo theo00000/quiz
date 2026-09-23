@@ -153,21 +153,12 @@ export default function Quiz() {
 
     const isCorrect = answer === question.correctAnswer;
 
-    console.log("=== CHECK ANSWER ===");
-    console.log("Question:", question.question);
-    console.log("User answer:", answer);
-    console.log("Correct answer:", question.correctAnswer);
-    console.log("Is correct:", isCorrect);
-
     const newSelectedAnswers = {
       ...selectedAnswers,
       [currentQuestion]: answer,
     };
 
     const newCorrectAnswers = isCorrect ? correctAnswers + 1 : correctAnswers;
-
-    console.log("Correct answers before:", correctAnswers);
-    console.log("Correct answers after:", newCorrectAnswers);
 
     setSelectedAnswers(newSelectedAnswers);
     setCorrectAnswers(newCorrectAnswers);
@@ -201,9 +192,6 @@ export default function Quiz() {
       answeredQuestions,
       totalQuestions: questions.length,
     };
-
-    console.log("=== FINAL RESULT ===");
-    console.log(result);
 
     localStorage.setItem("quiz_result", JSON.stringify(result));
 
